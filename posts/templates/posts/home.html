@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block 'main_body' %}
+     {% for post in object_list %}
+        <div>
+          <a href="{% url 'post_detail' post.owner.username post.pk %}">
+                <img src="{{ post.image.url }}" width="400px" alt="{{ post.title }}" title="{{ ad.title }}">
+          </a>
+
+            <div>
+                <a href="{% url 'post_detail' post.owner.username post.pk %}">
+                    <h2>{{post.title}}</h2>
+                </a>
+                <div>{{post.owner.first_name}} {{post.owner.last_name}}</div>
+                <div>
+                    {{post.intro}}
+                </div>
+                <div>
+                    <p>Posted on {{post.publication_date|date:"d/m/Y H:i"}}</p>
+                </div>
+            </div>
+        </div>
+        <hr />
+    {% endfor %}
+{% endblock %}

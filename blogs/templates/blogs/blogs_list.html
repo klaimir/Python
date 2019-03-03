@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block 'header_title' %} BLOGS {% endblock %}
+
+{% block 'main_body' %}
+
+      {% for user in object_list %}
+        <p>
+            <a href="{% url 'user_blog' user.username %}">
+               {{user.blog.title}}
+            </a>
+        </p>
+      {% endfor %}
+
+{% endblock %}

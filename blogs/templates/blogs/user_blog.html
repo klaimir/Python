@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block 'header_title' %} {{title}} {% endblock %}
+
+ {% block 'main_body' %}
+
+    {% if posts %}
+      {% for post in posts %}
+        <p>
+          <a href="{% url 'post_detail' post.owner.username post.pk %}">
+              <img src="{{ post.image.url }}" width="400px" alt="{{ post.title }}" title="{{ ad.title }}">
+          </a>
+
+            <p>
+                <a href="{% url 'post_detail' post.owner.username post.pk %}">
+                    <h2>{{post.title}}</h2>
+                </a>
+                <p>{{post.owner.first_name}} {{post.owner.last_name}}</p>
+                <p>
+                    {{post.intro}}
+                </p>
+                <p>Posted on {{post.publication_date|date:"d/m/Y H:i"}}</p>
+            </p>
+        </div>
+        <hr />
+
+      {% endfor %}
+    {% else %}
+        <p>This user has not published any post yet</p>
+    {% endif %}
+{% endblock %}

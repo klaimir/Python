@@ -1,0 +1,20 @@
+from django.contrib.auth.models import User
+from django.shortcuts import render
+from django.views import View
+from django.views.generic import ListView
+
+from blogs.models import Blog
+from posts.models import Post
+
+
+class BlogsListView(ListView):
+    model = User
+    template_name = 'blogs/blogs_list.html'
+
+
+class UserBlogView(View):
+
+    def get(self, request, username):
+        posts = Post.objects.select_related('owner').filter(owner__username=username).order_by('-last_modification')
+        blog = Blog.objects.get(user__username=username)
+        return render(request, 'blogs/user_blog.html', {'posts': posts, 'title': blog})
